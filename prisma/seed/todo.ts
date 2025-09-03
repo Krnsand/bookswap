@@ -1,5 +1,5 @@
 import { Todo } from "@/generated/prisma";
-import { db } from "../db";
+import { db } from "../../lib/prisma";
 
 export async function seedTodos() {
   const mockedTodos: Todo[] = [

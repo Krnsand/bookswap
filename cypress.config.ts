@@ -42,7 +42,7 @@ export default defineConfig({
       process.env.DATABASE_URL = dbUri;
       on("task", {
         async reseed() {
-          const { db } = await import("./prisma/db");
+          const { db } = await import("./lib/prisma");
           const { seedTodos } = await import("./prisma/seed/todo");
           await db.todo.deleteMany();
           await seedTodos();

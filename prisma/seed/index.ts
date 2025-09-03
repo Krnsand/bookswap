@@ -1,4 +1,4 @@
-import { db } from "../db";
+import { db } from "../../lib/prisma";
 import { seedTodos } from "./todo";
 
 async function main() {
