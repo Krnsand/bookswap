@@ -1,11 +1,18 @@
 import { PrismaClient } from "@prisma/client";
 
-const globalForPrisma = global as unknown as { prisma: PrismaClient };
+// TypeScript global declaration
+declare global {
 
+  var prisma: PrismaClient | undefined;
+}
+
+// Use the existing PrismaClient in dev (hot reload safe), otherwise create new
 export const prisma =
-  globalForPrisma.prisma ||
+  global.prisma ??
   new PrismaClient({
-    log: ["error", "warn"],
+    log: ["query", "info", "warn", "error"],
   });
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+if (process.env.NODE_ENV !== "production") {
+  global.prisma = prisma;
+}

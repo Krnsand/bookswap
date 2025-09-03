@@ -1,4 +1,3 @@
-
 let currentUserId: string | null = null;
 
 export function loginFake(userId: string) {

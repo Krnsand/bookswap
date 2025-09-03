@@ -1,12 +1,6 @@
-import { db } from "@/lib/prisma";
-import TodoList from "./ui/todo-list";
+// app/page.tsx
+import { redirect } from "next/navigation";
 
-export default async function Home() {
-  const todos = await db.todo.findMany();
-
-  return (
-    <main>
-      <TodoList defaultTodos={todos} />
-    </main>
-  );
+export default function HomePage() {
+  redirect("/dashboard");
 }
