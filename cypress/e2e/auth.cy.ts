@@ -28,19 +28,16 @@ describe("Authentication flows", () => {
   });
 
   it("should allow a user to sign out", () => {
-  // Logga in först
   cy.visit("/sign-in");
   cy.get('input[name="email"]').type("karin@example.com");
   cy.get('input[name="password"]').type("SuperSecret123!");
   cy.get('button[type="submit"]').click();
   cy.url().should("include", "/dashboard");
 
-  // Klicka på Sign out
   cy.contains("Sign out").click();
 
-  // Borde redirectas till /sign-in
   cy.url().should("include", "/sign-in");
-  cy.contains("Sign In"); // eller rubrik/knapp på sign-in sidan
+  cy.contains("Sign In"); 
 });
 
 });

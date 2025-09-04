@@ -18,14 +18,14 @@ async function main() {
   await prisma.book.createMany({
     data: [
       {
-        title: "The Pragmatic Programmer",
-        author: "Andy Hunt",
+        title: "Lord of the Rings",
+        author: "J.R.R. Tolkien",
         ownerId: user.id, 
         available: true,
       },
       {
-        title: "Clean Code",
-        author: "Robert C. Martin",
+        title: "The Wise Mans Fear",
+        author: "Patrick Rothfuss",
         ownerId: user.id,
         available: false,
       },
