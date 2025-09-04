@@ -14,7 +14,7 @@ export default function DashboardPage() {
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) setBooks(data);
-        else setBooks([]); // fallback om data är fel
+        else setBooks([]);
       });
   }, []);
 
