@@ -1,12 +1,9 @@
-import { PrismaClient } from "../generated/prisma";
+import { PrismaClient } from "@prisma/client";
 
-// TypeScript global declaration
 declare global {
-
   var prisma: PrismaClient | undefined;
 }
 
-// Use the existing PrismaClient in dev (hot reload safe), otherwise create new
 export const prisma =
   global.prisma ??
   new PrismaClient({

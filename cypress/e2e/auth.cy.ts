@@ -1,5 +1,5 @@
 describe("Authentication flows", () => {
- it("should allow a new user to register (happy path)", () => {
+ it("should allow a new user to register", () => {
   cy.visit("/sign-up");
   cy.get('input[name="name"]').type("Karin Testsson");
   cy.get('input[name="email"]').type("karin@example.com");
@@ -10,7 +10,7 @@ describe("Authentication flows", () => {
 });
 
 
-  it("should show error on wrong password (not happy path)", () => {
+  it("should show error on wrong password", () => {
     cy.visit("/sign-in");
     cy.get('input[name="email"]').type("karin@example.com");
     cy.get('input[name="password"]').type("WrongPassword123");

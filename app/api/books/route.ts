@@ -1,19 +1,21 @@
-import { prisma } from "@/lib/prisma";
-import { getCurrentUserId } from "@/lib/session";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const userId = getCurrentUserId();
-  if (!userId) return NextResponse.json([], { status: 401 });
-  const books = await prisma.book.findMany({ where: { ownerId: userId } });
-  return NextResponse.json(books);
-}
+  try {
+    const cookieStore = await cookies(); // await här
+    const ownerId = cookieStore.get("session")?.value;
 
-export async function POST(req: Request) {
-  const userId = getCurrentUserId();
-  if (!userId) return NextResponse.json({ error: "Not logged in" }, { status: 401 });
+    if (!ownerId) {
+      return NextResponse.json({ error: "Not logged in" }, { status: 401 });
+    }
 
-  const { title, author } = await req.json();
-  const book = await prisma.book.create({ data: { title, author, ownerId: userId } });
-  return NextResponse.json(book);
+    const books = await prisma.book.findMany({ where: { ownerId } });
+    return NextResponse.json(books);
+  } catch (err: unknown) {
+    return NextResponse.json(
+      { error: (err as Error).message || "Something went wrong" },
+      { status: 500 }
+    );
+  }
 }
