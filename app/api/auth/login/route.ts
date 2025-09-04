@@ -1,21 +1,18 @@
-import { prisma } from "@/lib/prisma";
-import { loginFake } from "@/lib/session";
-import bcrypt from "bcryptjs";
+import { loginUser } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const { email, password } = await req.json();
-  const user = await prisma.user.findUnique({ where: { email } });
+  try {
+    const { email, password } = await req.json();
+    const user = await loginUser(email, password);
 
-  if (!user) {
-    return NextResponse.json({ error: "Invalid email or password" }, { status: 400 });
+    if (!user) throw new Error("Invalid email or password");
+
+    const res = NextResponse.json({ message: "Logged in", redirectTo: "/dashboard" });
+    res.cookies.set("session", user.id, { httpOnly: true, path: "/" });
+
+    return res;
+  } catch (err: unknown) {
+    return NextResponse.json({ error: (err as Error).message }, { status: 400 });
   }
-
-  const isValid = await bcrypt.compare(password, user.password);
-  if (!isValid) {
-    return NextResponse.json({ error: "Invalid email or password" }, { status: 400 });
-  }
-
-  loginFake(user.id);
-  return NextResponse.json({ message: "Logged in" });
 }

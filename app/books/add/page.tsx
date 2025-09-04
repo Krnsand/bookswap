@@ -25,33 +25,52 @@ export default function AddBookPage() {
       if (!res.ok) {
         setError(data.error || "Something went wrong");
       } else {
+        // Lyckad skapelse, redirect till dashboard
         router.push("/dashboard");
       }
     } catch (err) {
-      setError("Failed to add book");
+      setError("Failed to add book. Try again.");
     }
   }
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Add a New Book</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2 max-w-md">
-        <input
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Book title"
-          required
-        />
-        <input
-          name="author"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-          placeholder="Author"
-          required
-        />
-        <button type="submit">Add Book</button>
-        {error && <p className="text-red-600">{error}</p>}
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded shadow-md w-full max-w-sm"
+      >
+        <h1 className="text-2xl font-bold mb-4 text-center">Add a Book</h1>
+
+        <label className="block mb-2">
+          Title
+          <input
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            className="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+          />
+        </label>
+
+        <label className="block mb-4">
+          Author
+          <input
+            name="author"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            required
+            className="mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+          />
+        </label>
+
+        {error && <p className="text-red-500 mb-4">{error}</p>}
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+        >
+          Add Book
+        </button>
       </form>
     </div>
   );

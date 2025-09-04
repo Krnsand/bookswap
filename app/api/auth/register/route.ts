@@ -1,5 +1,4 @@
 import { registerUser } from "@/lib/auth";
-import { loginFake } from "@/lib/session";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -7,13 +6,12 @@ export async function POST(req: Request) {
     const { name, email, password } = await req.json();
 
     const user = await registerUser(name, email, password);
-    loginFake(user.id); // sätter session
 
-    return NextResponse.json({ redirectTo: "/dashboard" }, { status: 201 });
+    const res = NextResponse.json({ message: "Registered", redirectTo: "/dashboard" });
+    res.cookies.set("session", user.id, { httpOnly: true, path: "/" });
+
+    return res;
   } catch (err: unknown) {
-    return NextResponse.json(
-      { error: (err as Error).message },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: (err as Error).message }, { status: 400 });
   }
 }

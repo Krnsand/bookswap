@@ -3,12 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface Book {
-  id: string;
-  title: string;
-  author: string;
-  available: boolean;
-}
+type Book = { id: string; title: string; author: string; available: boolean };
 
 export default function DashboardPage() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -24,21 +19,18 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">
-        Welcome to BookSwap!
-      </h1>
-
+    <div className="p-6 max-w-lg mx-auto text-center">
+      <h1 className="text-3xl font-bold mb-6">Welcome to BookSwap!</h1>
       <button
         onClick={() => router.push("/books/add")}
-        className="mb-8 px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        className="mb-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
       >
-        Add a Book
+        Add Book
       </button>
 
-      <ul className="w-full max-w-md space-y-3">
-        {books.map((b: any) => (
-          <li key={b.id}>
+      <ul className="space-y-3">
+        {books.map((b) => (
+          <li key={b.id} className="p-4 bg-white shadow rounded">
             {b.title} by {b.author} ({b.available ? "Available" : "Loaned out"})
           </li>
         ))}
