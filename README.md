@@ -1,6 +1,6 @@
 # BookSwap
 
-BookSwap är en simpel app byggd med Next.js och Prisma som låter användare byta och hantera böcker. Appen innehåller autentisering, dashboard med användarens böcker, och möjligheten att lägga till nya böcker. Cypress används för end-to-end tester av användarflöden.
+BookSwap är en simpel app byggd med Next.js, Prisma, MongoDB, Cypress som låter användare byta och hantera böcker. Appen innehåller autentisering, dashboard med användarens böcker, och möjligheten att lägga till nya böcker. Cypress används för end-to-end tester av användarflöden.
 I framtiden är tanken att man ska kunna byta med andra användare samt kunna kontakta andra användare gällande bokönskemål.
 
 ## Funktioner
@@ -52,4 +52,4 @@ I framtiden är tanken att man ska kunna byta med andra användare samt kunna ko
 
 #### Displaying book availability (Available / Loaned out)
 
-"On the dashboard, each book is displayed with its title, author, and availability status. Karin sees 'Lord of the Rings by J.R.R. Tolkien (Available)' and 'The Wise Mans Fear by Robert C. Martin (Loaned out)'."
+"On the dashboard, each book is displayed with its title, author, and availability status. Karin sees 'Lord of the Rings by J.R.R. Tolkien (Available)' and 'The Wise Mans Fear by Patrick Rothfuss (Loaned out)'."
