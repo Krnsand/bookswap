@@ -7,23 +7,20 @@ async function main() {
 
   const hashedPassword = await bcrypt.hash("SuperSecret123!", 10);
 
-  const user = await prisma.user.upsert({
-    where: { email: "karin@example.com" },
-    update: {},
-    create: {
+  const user = await prisma.user.create({
+    data: {
       name: "Karin Testsson",
       email: "karin@example.com",
       password: hashedPassword,
     },
   });
 
- 
   await prisma.book.createMany({
     data: [
       {
         title: "The Pragmatic Programmer",
         author: "Andy Hunt",
-        ownerId: user.id,
+        ownerId: user.id, 
         available: true,
       },
       {

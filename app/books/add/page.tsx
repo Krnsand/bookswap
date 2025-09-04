@@ -36,7 +36,7 @@ export default function AddBookPage() {
     <div className="min-h-screen flex items-center justify-center bg-black p-6">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded shadow-md w-full max-w-sm"
+        className="bg-slate-300 p-6 rounded shadow-md w-full max-w-sm"
       >
         <h1 className="text-2xl text-black font-bold mb-4 text-center">
           Add a Book
