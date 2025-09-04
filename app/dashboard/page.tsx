@@ -1,8 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 
+type Book = {
+  id: string;
+  title: string;
+  author: string;
+  available: boolean;
+};
+
 export default function DashboardPage() {
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState<Book[]>([]);
 
   useEffect(() => {
     fetch("/api/books")
@@ -11,10 +18,10 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div>
-      <h1>My Books</h1>
+    <div className="p-6">
+      <h1 className="text-2xl font-bold">My Books</h1>
       <ul>
-        {books.map((b: any) => (
+        {books.map((b) => (
           <li key={b.id}>
             {b.title} av {b.author} ({b.available ? "Available" : "Loaned out"})
           </li>
