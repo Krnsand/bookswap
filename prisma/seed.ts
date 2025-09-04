@@ -1,18 +1,21 @@
-// prisma/seed.ts
 import { prisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
 
 async function main() {
-  // Skapa en testanvändare
-  const user = await prisma.user.create({
-    data: { email: "anna@test.com", password: "1234" },
-  });
+  // Rensa databasen (valfritt)
+  await prisma.book.deleteMany();
+  await prisma.user.deleteMany();
 
-  // Skapa en bok
-  await prisma.book.create({
-    data: {
-      title: "Harry Potter",
-      author: "J.K. Rowling",
-      ownerId: user.id,
+  // Testanvändare för Book-flows
+  const hashedPassword = await bcrypt.hash("SuperSecret123!", 10);
+
+  await prisma.user.upsert({
+    where: { email: "karin@example.com" },
+    update: {},
+    create: {
+      name: "Karin Testsson",
+      email: "karin@example.com",
+      password: hashedPassword,
     },
   });
 
