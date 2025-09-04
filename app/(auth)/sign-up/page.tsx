@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function SignUpPage() {
@@ -7,7 +6,6 @@ export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,36 +22,52 @@ export default function SignUpPage() {
     if (!res.ok) {
       setError(data.error || "Something went wrong");
     } else {
-      router.push("/dashboard");
+      window.location.href = "/dashboard";
     }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Name"
-        required
-      />
-      <input
-        name="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        required
-      />
-      <button type="submit">Register</button>
-      {error && <p>{error}</p>}
-    </form>
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded shadow w-80 space-y-4"
+      >
+        <h2 className="text-xl font-bold text-black text-center">Register</h2>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full border px-3 py-2 text-slate-900 rounded"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full border px-3 py-2 text-slate-900 rounded"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full border px-3 py-2 text-slate-900 rounded"
+          required
+        />
+        <button
+          type="submit"
+          className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600"
+        >
+          Register
+        </button>
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+      </form>
+    </div>
   );
 }
