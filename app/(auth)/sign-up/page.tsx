@@ -67,6 +67,17 @@ export default function SignUpPage() {
           Register
         </button>
         {error && <p className="text-red-500 text-sm">{error}</p>}
+        <div>
+          <p className="items-center justify-center text-black ">
+            Already have an account? Sign in instead!
+          </p>
+        </div>
+        <a
+          href="/sign-in"
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Sign in
+        </a>
       </form>
     </div>
   );

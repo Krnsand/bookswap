@@ -30,7 +30,7 @@ describe("Book flows", () => {
     cy.contains("The Wise Mans Fear");
   });
 
-  it("should allow adding a book (happy path)", () => {
+  it("should allow adding a book", () => {
     cy.visit("/books/add");
 
     cy.get('input[name="title"]').type("Wild Magic");
