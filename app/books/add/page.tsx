@@ -25,7 +25,6 @@ export default function AddBookPage() {
       if (!res.ok) {
         setError(data.error || "Something went wrong");
       } else {
-        // Lyckad skapelse, redirect till dashboard
         router.push("/dashboard");
       }
     } catch (err) {
@@ -34,14 +33,16 @@ export default function AddBookPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-black p-6">
       <form
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded shadow-md w-full max-w-sm"
       >
-        <h1 className="text-2xl font-bold mb-4 text-center">Add a Book</h1>
+        <h1 className="text-2xl text-black font-bold mb-4 text-center">
+          Add a Book
+        </h1>
 
-        <label className="block mb-2">
+        <label className="block mb-2 text-slate-900">
           Title
           <input
             name="title"
@@ -52,7 +53,7 @@ export default function AddBookPage() {
           />
         </label>
 
-        <label className="block mb-4">
+        <label className="block mb-4 text-slate-900">
           Author
           <input
             name="author"
